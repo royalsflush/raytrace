@@ -17,6 +17,11 @@ class Vector {
 	Vector operator-(const Vector& a);
 	Vector& operator*=(const double a);
 	Vector operator*(const double a);
+	double operator*(const Vector& a);
+
+	double length();
+	void normalize();
+	void print();
 };
 
 #endif //VECTOR_H

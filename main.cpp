@@ -9,10 +9,16 @@
 	#include <GL/glut.h>
 #endif
 
+#include "raytracer.h"
+#include "vector.h"
+
 #define WIN_W 1024
 #define WIN_H 768
 
+Raytracer* r;
+
 void initRender();
+void init();
 void handleKeyPress(unsigned char k, int x, int y);
 void handleResize(int w, int h);
 void render();
@@ -23,7 +29,7 @@ int main(int argc, char ** argv) {
 	glutInitWindowSize(WIN_W, WIN_H);
 
 	glutCreateWindow("First try: raytracer");
-	initRender();
+	init();
 
 	glutKeyboardFunc(handleKeyPress);
 	glutDisplayFunc(render);
@@ -32,6 +38,12 @@ int main(int argc, char ** argv) {
 	glutMainLoop();
 		
 	return 0;
+}
+
+void init() {
+	r = new Raytracer(WIN_W, WIN_H,
+			50.0,1000.0);
+	initRender();
 }
 
 void initRender() {
@@ -67,26 +79,17 @@ void handleResize(int w, int h) {
 
 void render() {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor4f(1.0,0.0,0.0,0.0);
 
-	glBegin(GL_QUADS);
-		glVertex2i(100,100);
-		glVertex2i(200,100);
-		glVertex2i(200,200);
-		glVertex2i(100,200);
-	glEnd();
-
-	glColor3f(0.0,1.0,0.0);
-
-	glBegin(GL_POINTS);
-	glVertex2i(300, 300);
-	glEnd();
-
-	glColor3f(0.0,0.0,1.0);
-
-	glBegin(GL_POINTS);
-	glVertex2i(301, 300);
-	glEnd();
+	for (int x=0; x<WIN_W; x++) {
+		for (int y=0; y<WIN_H; y++) {
+			Vector col = r->getColor(x,y);
+			glColor3f(col.x,col.y,col.z);
+			
+			glBegin(GL_POINTS);
+				glVertex2i(x,y);
+			glEnd();
+		}
+	}
 
 	glFlush();
 	glutSwapBuffers();

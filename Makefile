@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS= #-O2
 LIBS = -lm #-lGLEW
-SRC= main.cpp 
+SRC= main.cpp vector.cpp raytracer.cpp 
 OUTPUT=out
 
 OBJ=$(SRC:.cpp=.o)
