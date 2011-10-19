@@ -76,6 +76,18 @@ void render() {
 		glVertex2i(100,200);
 	glEnd();
 
+	glColor3f(0.0,1.0,0.0);
+
+	glBegin(GL_POINTS);
+	glVertex2i(300, 300);
+	glEnd();
+
+	glColor3f(0.0,0.0,1.0);
+
+	glBegin(GL_POINTS);
+	glVertex2i(301, 300);
+	glEnd();
+
 	glFlush();
 	glutSwapBuffers();
 }
