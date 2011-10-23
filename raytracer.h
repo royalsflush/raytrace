@@ -4,6 +4,10 @@ using namespace std;
 
 #include "vector.h"
 
+enum tracerMode {
+	ORTHO, PERSPECTIVE 
+};
+
 class Raytracer {
 	//Camera parameters
 	double znear,zfar;
@@ -20,6 +24,8 @@ class Raytracer {
 
 	//Background colour
 	double r,g,b,a;
+
+	tracerMode currMode;
 
 	public:
 	Raytracer(double width, double height, double near,
