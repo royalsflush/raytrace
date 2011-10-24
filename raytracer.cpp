@@ -19,7 +19,6 @@ Raytracer::Raytracer(double width, double height, double near,
 	eye.y = height/2.0;
 	eye.z = -znear;
 
-	bgVec = Vector(0.0,0.0,0.0,0.0);	
 	currMode = ORTHO;		
 
 	root = new Sphere(Vector(1.0,0.0,0.0,0.0), 
@@ -75,4 +74,8 @@ Vector Raytracer::getColor(double px, double py) {
 		color+=lights[i]->calculateContrib(o,pt,*obj);
 
 	return color;
+}
+
+void Raytracer::setBackground(float r, float g, float b, float a) {
+	bgVec = Vector(r,g,b,a);
 }

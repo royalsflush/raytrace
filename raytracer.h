@@ -38,5 +38,6 @@ class Raytracer {
 	Raytracer(double width, double height, double near,
 		double far);
 	Vector getColor(double px, double py);		
-	//vector 
+	void setBackground(float r, float g, float g, 
+		float a); 
 };

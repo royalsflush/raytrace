@@ -48,6 +48,8 @@ void init() {
 
 void initRender() {
 	glClearColor(0.0,0.0,0.0,0.0);
+	r->setBackground(0.0,0.0,0.0,0.0);
+	
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glDisable(GL_DEPTH);
