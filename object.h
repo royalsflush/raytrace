@@ -9,9 +9,11 @@ class Ray;
 class Object : public Node {
 	Vector dif;
 	Vector spec;
+	int shi;
 
 	public:
-		Object(const Vector& pdif, const Vector& pspec);
+		Object(const Vector& pdif, const Vector& pspec, 
+			const int pshi);
 
 		virtual Object* checkIntersection(Ray& r) = 0;
 		virtual Vector getIntersectionPoint(Ray& r) = 0;
@@ -20,6 +22,7 @@ class Object : public Node {
 		//Getters
 		Vector& getDif();
 		Vector& getSpec();
+		int getShi();
 };
 
 #endif // OBJECT_H

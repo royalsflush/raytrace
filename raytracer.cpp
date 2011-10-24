@@ -24,6 +24,7 @@ Raytracer::Raytracer(double width, double height, double near,
 
 	root = new Sphere(Vector(1.0,0.0,0.0,0.0), 
 		Vector(0.4, 0.4, 0.4, 0.0),
+		70,
 		Vector(500.0, 300.0, 200.0), 70.0);
 
 	//Test source

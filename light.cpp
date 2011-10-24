@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "vector.h"
 #include "light.h"
 #include "object.h"
@@ -18,10 +20,13 @@ Vector Light::calculateContrib(Vector& pv, Vector& pt, Object& obj) {
 
 	Vector col(0.0,0.0,0.0,0.0);
 		
-	//Diffuse
 	if (l*n>0) {
+		//Diffuse
 		col+=this->dif*(l*n)*obj.getDif();
-//		col+=this->spec*(r*v)*obj.getSpec();
+		
+		//Specular 
+		double rva = pow(r*v,obj.getShi());
+		col+=this->spec*rva*obj.getSpec();
 	}
 
 	return col;

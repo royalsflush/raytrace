@@ -12,7 +12,7 @@ class Sphere : public Object {
 
 	public:
 		Sphere(const Vector& pdif, const Vector& pspec, 
-			const Vector& ppos, double pr);
+			const int pshi, const Vector& ppos, double pr);
 		Vector& getColor();
 		
 		Object* checkIntersection(Ray& r);
