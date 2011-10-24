@@ -1,9 +1,13 @@
 #include <math.h>
 
+#include <vector>
+using namespace std;
+
 #include "raytracer.h"
 #include "vector.h"
 #include "ray.h"
 #include "sphere.h"
+#include "light.h"
 
 const int negInf = 0xc0c0c0c0;
 
@@ -17,9 +21,17 @@ Raytracer::Raytracer(double width, double height, double near,
 	bgVec = Vector(0.0,0.0,0.0,0.0);	
 	currMode = ORTHO;		
 
-	Vector color(1.0,0.0,0.0,0.0);
+	root = new Sphere(Vector(1.0,0.0,0.0,0.0), 
+		Vector(200.0, 200.0, 200.0), 40.0);
 
-	root = new Sphere(Vector(1.0,0.0,0.0,0.0), Vector(200.0, 200.0, 200.0), 40.0);
+	//Test source
+	Light* light0 = new Light(Vector(400.0, 400.0, 200.0),
+				Vector(-1.0,-1.0,0.0,0.0),
+				45.0,
+				Vector(0.5,0.0,0.0,0.0),
+				Vector(0.2,0.2,0.2,0.0));
+
+	lights.push_back(light0);
 }
 
 Vector Raytracer::getColor(double px, double py) {
@@ -44,5 +56,5 @@ Vector Raytracer::getColor(double px, double py) {
 	Sphere* s = root->checkIntersection(r);
 	
 	if (!s) return bgVec;
-	return s->getColor();
+	
 }

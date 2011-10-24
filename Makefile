@@ -2,7 +2,7 @@ CC = g++
 CFLAGS= #-O2
 LIBS = -lm #-lGLEW
 SRC= main.cpp vector.cpp raytracer.cpp ray.cpp \
-	sphere.cpp 
+	sphere.cpp light.cpp 
 OUTPUT=out
 
 OBJ=$(SRC:.cpp=.o)
