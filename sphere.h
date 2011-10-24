@@ -4,6 +4,7 @@
 #include "vector.h"
 #include "object.h"
 
+class Material;
 class Ray;
 
 class Sphere : public Object {
@@ -11,8 +12,7 @@ class Sphere : public Object {
 	double r;
 
 	public:
-		Sphere(const Vector& pdif, const Vector& pspec, 
-			const int pshi, const Vector& ppos, double pr);
+		Sphere(const Material& pmat, const Vector& ppos, double pr);
 		Vector& getColor();
 		
 		Object* checkIntersection(Ray& r);

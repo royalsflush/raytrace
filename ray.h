@@ -8,8 +8,8 @@ class Ray {
 		Vector o;
 		Vector dir;
 
-		Ray(Vector& po, Vector& pd);
-		Ray& operator=(Ray& a);
+		Ray(const Vector& po, const Vector& pd);
+		Ray& operator=(const Ray& a);
 };
 
 #endif //RAY_H

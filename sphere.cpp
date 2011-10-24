@@ -6,12 +6,12 @@ using namespace std;
 #include "sphere.h"
 #include "ray.h"
 #include "vector.h"
+#include "material.h"
 
 #define sq(x) ((x)*(x))
 
-Sphere::Sphere(const Vector& pdif, const Vector& pspec, 
-	const int pshi, const Vector& ppos, double pr) : 
-	Object(pdif,pspec,pshi), pos(ppos), r(pr) { }
+Sphere::Sphere(const Material& pmat, const Vector& ppos, double pr) : 
+	Object(pmat), pos(ppos), r(pr) { }
 
 
 Object* Sphere::checkIntersection(Ray& r) {

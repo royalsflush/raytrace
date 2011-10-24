@@ -5,8 +5,12 @@
 #include "object.h"
 
 Light::Light(const Vector& ppos, const Vector& pdir, double pang,
-	const Vector& pdif, const Vector& pspec) : pos(ppos), 
-	dir(pdir), ang(pang), dif(pdif), spec(pspec) {}
+	const Vector& pamb, const Vector& pdif, const Vector& pspec) : pos(ppos), 
+	dir(pdir), ang(pang), dif(pdif), spec(pspec), amb(pamb) {}
+
+Vector& Light::getPos() {
+	return pos;
+}
 
 Vector Light::calculateContrib(Vector& pv, Vector& pt, Object& obj) {
 	Vector n = obj.getNormalAtPoint(pt);
@@ -18,19 +22,22 @@ Vector Light::calculateContrib(Vector& pv, Vector& pt, Object& obj) {
 	Vector v = pv-pt;
 	v.normalize();
 
+	Material mat = obj.getMat();
+
 	Vector col(0.0,0.0,0.0,0.0);
+	col+= mat.amb*this->amb;
 		
 	if (l*n>0) {
 		//Diffuse
-		col.x+=this->dif.x*(l*n)*obj.getDif().x;
-		col.y+=this->dif.y*(l*n)*obj.getDif().y;
-		col.z+=this->dif.z*(l*n)*obj.getDif().z;
+		col.x+=this->dif.x*(l*n)*mat.dif.x;
+		col.y+=this->dif.y*(l*n)*mat.dif.y;
+		col.z+=this->dif.z*(l*n)*mat.dif.z;
 		
 		//Specular 
-		double rva = pow(r*v,obj.getShi());
-		col.x+=this->spec.x*rva*obj.getSpec().x;
-		col.y+=this->spec.y*rva*obj.getSpec().y;
-		col.z+=this->spec.z*rva*obj.getSpec().z;
+		double rva = pow(r*v,mat.shi);
+		col.x+=this->spec.x*rva*mat.dif.x;
+		col.y+=this->spec.y*rva*mat.dif.y;
+		col.z+=this->spec.z*rva*mat.dif.z;
 	}
 	
 	return col;

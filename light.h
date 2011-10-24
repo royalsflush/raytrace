@@ -12,12 +12,14 @@ class Light {
 
 	Vector dif;
 	Vector spec;
-	
+	Vector amb;	
+
 	public:
 		Light(const Vector& ppos, const Vector& pdir,
 			double pang, const Vector& pdif,
-			const Vector& pspec);
-	
+			const Vector& pspec, const Vector& pamb);
+
+		Vector& getPos();	
 		Vector calculateContrib(Vector& pv, Vector& pt, 
 			Object& obj);
 };

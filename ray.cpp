@@ -1,11 +1,11 @@
 #include "vector.h"
 #include "ray.h"
 
-Ray::Ray(Vector& po, Vector& pd) : o(po), dir(pd) {
+Ray::Ray(const Vector& po, const Vector& pd) : o(po), dir(pd) {
 	dir.normalize();
 }
 
-Ray& Ray::operator=(Ray& a) {
+Ray& Ray::operator=(const Ray& a) {
 	this->o = a.o;
 	this->dir = a.dir;
 

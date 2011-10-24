@@ -26,21 +26,20 @@ Raytracer::Raytracer(double width, double height, double near,
 	raysPP=3;
 
 	OrOp* scene = new OrOp;
-	
-	Sphere* sp0 = new Sphere(Vector(0.5,0.5,0.5,0.0), 
-		Vector(0.4, 0.4, 0.4, 0.0),
-		70,
-		Vector(800.0, 500.0, 200.0), 70.0);
 
-	Triangle* tri1 = new Triangle(Vector(0.5,0.5,0.5,0.5),
-		Vector(0.4,0.4,0.4,0.0), 20,
+	Material redPlastic(Vector(0.1,0.1,0.1,0.0),
+			Vector(0.5,0.05,0.1,0.0),
+			Vector(0.2,0.2,0.2,0.0), 70);
+	
+	Sphere* sp0 = new Sphere(redPlastic,
+		Vector(500.0, 500.0, 200.0), 70.0);
+
+	Triangle* tri1 = new Triangle(redPlastic,
 		Vector(100.0, 100.0, 200.0),
 		Vector(200.0, 100.0, 200.0),
 		Vector(100.0, 200.0, 200.0));
 
-	Sphere* sp1 = new Sphere(Vector(0.5,0.5,0.5,0.0), 
-		Vector(0.4, 0.4, 0.4, 0.0),
-		70,
+	Sphere* sp1 = new Sphere(redPlastic,
 		Vector(400.0, 400.0, 200.0), 70.0);
 	
 	scene->addChildren(tri1);
@@ -49,21 +48,23 @@ Raytracer::Raytracer(double width, double height, double near,
 	root=scene;
 
 	//Test source
-	Light* light0 = new Light(Vector(600.0, 400.0, 0.0),
+	Light* light0 = new Light(Vector(600.0,600.0, 200.0),
 				Vector(-1.0,-1.0,0.0,0.0),
 				45.0,
-				Vector(0.1,0.5,0.1,0.0),
+				Vector(0.1,0.1,0.1,0.0),
+				Vector(0.5,0.5,0.5,0.0),
 				Vector(0.2,0.2,0.2,0.0));
 
 	Light* light1 = new Light(Vector(150.0, 150.0, 100.0),
 				Vector(1.0,1.0,0.0,0.0),
 				45.0,
+				Vector(0.2,0.0,0.01,0.0),
 				Vector(0.3,0.0,0.0,0.0),
 				Vector(0.2,0.2,0.2,0.0));
 
 
 	lights.push_back(light0);
-	lights.push_back(light1);
+//	lights.push_back(light1);
 }
 
 Vector Raytracer::getColor(double px, double py) {
@@ -92,9 +93,15 @@ Vector Raytracer::getColor(double px, double py) {
 	Vector color(0.0,0.0,0.0,0.0);
 	Vector pt = obj->getIntersectionPoint(r);
 
-	for (int i=0; i<lights.size(); i++) 
-		color+=lights[i]->calculateContrib(o,pt,*obj);
-	
+	for (int i=0; i<lights.size(); i++) { 
+		//Check if light is actually hitting is object
+		Vector l = lights[i]->getPos();
+		Ray ol(l,pt-l);
+		
+//		if (root->checkIntersection(ol)==obj)
+			color+=lights[i]->calculateContrib(o,pt,*obj);
+	}
+
 	return color;
 }
 

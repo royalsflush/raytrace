@@ -5,13 +5,13 @@
 #include "ray.h"
 #include "object.h"
 #include "vector.h"
+#include "material.h"
 
 const double eps = 1e-9;
 
-Triangle::Triangle(const Vector& pdif, const Vector& pspec,
-	const double shi, const Vector& pp1,
+Triangle::Triangle(const Material& pmat, const Vector& pp1,
 	const Vector& pp2, const Vector& pp3) :
-	Object(pdif,pspec,shi), p1(pp1), p2(pp2), p3(pp3) {}
+	Object(pmat), p1(pp1), p2(pp2), p3(pp3) {}
 
 
 Object* Triangle::checkIntersection(Ray& r) {
