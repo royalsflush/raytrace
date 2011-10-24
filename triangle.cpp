@@ -1,6 +1,5 @@
 #include <math.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "triangle.h"
 #include "ray.h"
@@ -50,7 +49,7 @@ Vector Triangle::getIntersectionPoint(Ray& r){
 }
 
 Vector Triangle::getNormalAtPoint(Vector& p) {
-	Vector v = (p2-p1).cross(p3-p1);
+	Vector v = (p3-p1).cross(p2-p1);
 	v.normalize();
 	return v;
 } 

@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdlib.h>
 
 #include <vector>
 using namespace std;
@@ -91,7 +92,7 @@ Vector Raytracer::getColor(double px, double py) {
 
 	for (int i=0; i<lights.size(); i++) 
 		color+=lights[i]->calculateContrib(o,pt,*obj);
-
+	
 	return color;
 }
 
