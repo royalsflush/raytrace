@@ -9,13 +9,10 @@ using namespace std;
 
 #define sq(x) ((x)*(x))
 
-Sphere::Sphere(const Vector& pcolor, const Vector& ppos, double pr) : 
-	color(pcolor), pos(ppos), r(pr) { }
+Sphere::Sphere(const Vector& pdif, const Vector& pspec, 
+	const Vector& ppos, double pr) : Object(pdif,pspec), 
+	pos(ppos), r(pr) { }
 
-
-Vector& Sphere::getColor() {
-	return color;
-} 
 
 Object* Sphere::checkIntersection(Ray& r) {
 	double a = sq(r.dir);

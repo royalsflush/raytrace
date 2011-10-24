@@ -7,12 +7,12 @@
 class Ray;
 
 class Sphere : public Object {
-	Vector color;
 	Vector pos;
 	double r;
 
 	public:
-		Sphere(const Vector& pcolor, const Vector& ppos, double pr);
+		Sphere(const Vector& pdif, const Vector& pspec, 
+			const Vector& ppos, double pr);
 		Vector& getColor();
 		
 		Object* checkIntersection(Ray& r);

@@ -18,7 +18,8 @@ class Light {
 			double pang, const Vector& pdif,
 			const Vector& pspec);
 	
-		Vector calculateContrib(Vector& pt, Object& obj);
+		Vector calculateContrib(Vector& pv, Vector& pt, 
+			Object& obj);
 };
 
 #endif //LIGHT_H
