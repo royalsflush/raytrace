@@ -57,5 +57,13 @@ Vector Raytracer::getColor(double px, double py) {
 	Object* obj = root->checkIntersection(r);
 	
 	if (!obj) return bgVec;
-	return Vector(1.0,0.0,0.0,0.0);
+//	return Vector(1.0,0.0,0.0,0.0);
+
+	Vector color(0.0,0.0,0.0,0.0);
+	Vector pt = obj->getIntersectionPoint(r);
+
+	for (int i=0; i<lights.size(); i++) 
+		color+=lights[i]->calculateContrib(pt,*obj);
+
+	return color;
 }

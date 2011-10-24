@@ -3,18 +3,22 @@
 
 #include "vector.h"
 
+class Object;
+
 class Light {
 	Vector pos;
 	Vector dir;	
 	double ang;
 
-	Vector diff;
+	Vector dif;
 	Vector spec;
 	
 	public:
 		Light(const Vector& ppos, const Vector& pdir,
-			double pang, const Vector& pdiff,
+			double pang, const Vector& pdif,
 			const Vector& pspec);
+	
+		Vector calculateContrib(Vector& pt, Object& obj);
 };
 
 #endif //LIGHT_H

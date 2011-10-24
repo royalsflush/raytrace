@@ -30,3 +30,4 @@ gs: $(OBJ)
 
 depend:
 	makedepend -- $(CFLAGS) -- $(SRC)
+# DO NOT DELETE

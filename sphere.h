@@ -1,11 +1,12 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
-#include "node.h"
 #include "vector.h"
-#include "ray.h"
+#include "object.h"
 
-class Sphere : public Node {
+class Ray;
+
+class Sphere : public Object {
 	Vector color;
 	Vector pos;
 	double r;
@@ -15,8 +16,8 @@ class Sphere : public Node {
 		Vector& getColor();
 		
 		Object* checkIntersection(Ray& r);
-		Vector& getIntersectionPoint(Ray& r);
-		Vector& getNormalAtPoint(Vector& p);
+		Vector getIntersectionPoint(Ray& r);
+		Vector getNormalAtPoint(Vector& p);
 };
 
 #endif // SPHERE _H

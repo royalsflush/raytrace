@@ -76,6 +76,15 @@ double Vector::operator*(const Vector& a) {
 	return dot;
 }
 
+Vector& Vector::operator/=(const double a) {
+	this->x/=a;
+	this->y/=a;
+	this->z/=a;
+	this->w/=a;
+
+	return *this;
+}
+
 double Vector::length() {
 	double dot = (*this)*(*this);
 	return sqrt(dot);
