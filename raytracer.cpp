@@ -6,6 +6,7 @@ using namespace std;
 #include "raytracer.h"
 #include "vector.h"
 #include "ray.h"
+#include "object.h"
 #include "sphere.h"
 #include "light.h"
 
@@ -53,8 +54,8 @@ Vector Raytracer::getColor(double px, double py) {
 	
 	Ray r(o,d);
 
-	Sphere* s = root->checkIntersection(r);
+	Object* obj = root->checkIntersection(r);
 	
-	if (!s) return bgVec;
-	
+	if (!obj) return bgVec;
+	return Vector(1.0,0.0,0.0,0.0);
 }

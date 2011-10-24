@@ -2,11 +2,11 @@
 #define NODE_H
 
 class Ray;
-class Sphere;
+class Object;
 
 class Node {
 	public:
-		virtual Sphere* checkIntersection(Ray& r) = 0;
+		virtual Object* checkIntersection(Ray& r) = 0;
 };
 
 #endif // NODE_H

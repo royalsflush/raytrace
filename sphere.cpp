@@ -15,7 +15,7 @@ Vector& Sphere::getColor() {
 	return color;
 } 
 
-Sphere* Sphere::checkIntersection(Ray& r) {
+Object* Sphere::checkIntersection(Ray& r) {
 	double a = sq(r.dir);
 	double b = (r.dir*2.0)*(r.o-this->pos);
 	double c = sq(r.o-this->pos)-sq(this->r);
@@ -29,7 +29,7 @@ Sphere* Sphere::checkIntersection(Ray& r) {
 	double t2 = (-b+sqrt(delta))/2*a;
 
 	double t = min(t1,t2);
-	if (t>0) return this;
-	
+
+	if (t>0) return (Object*) this;
 	return NULL;
 }

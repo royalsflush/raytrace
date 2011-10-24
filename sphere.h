@@ -14,8 +14,9 @@ class Sphere : public Node {
 		Sphere(const Vector& pcolor, const Vector& ppos, double pr);
 		Vector& getColor();
 		
-		Sphere* checkIntersection(Ray& r);
+		Object* checkIntersection(Ray& r);
 		Vector& getIntersectionPoint(Ray& r);
+		Vector& getNormalAtPoint(Vector& p);
 };
 
 #endif // SPHERE _H
