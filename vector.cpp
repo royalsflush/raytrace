@@ -85,6 +85,16 @@ Vector& Vector::operator/=(const double a) {
 	return *this;
 }
 
+Vector Vector::cross(const Vector& a) {
+	Vector res;
+	
+	res.x = this->y*a.z - a.y*this->z;
+	res.y = -(this->x*a.z - a.x*this->z);
+	res.z = this->x*a.y - this->y*a.x;
+
+	return res;
+}
+
 double Vector::length() {
 	double dot = (*this)*(*this);
 	return sqrt(dot);

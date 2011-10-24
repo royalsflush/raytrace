@@ -23,6 +23,7 @@ class Vector {
 	double length();
 	void normalize();
 	void print();
+	Vector cross(const Vector& a);
 };
 
 #endif //VECTOR_H

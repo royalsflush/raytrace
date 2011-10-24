@@ -10,6 +10,7 @@ using namespace std;
 #include "sphere.h"
 #include "light.h"
 #include "orOp.h"
+#include "triangle.h"
 
 const int negInf = 0xc0c0c0c0;
 
@@ -29,13 +30,19 @@ Raytracer::Raytracer(double width, double height, double near,
 		70,
 		Vector(800.0, 500.0, 200.0), 70.0);
 
+	Triangle* tri1 = new Triangle(Vector(0.5,0.5,0.5,0.5),
+		Vector(0.4,0.4,0.4,0.0), 20,
+		Vector(100.0, 100.0, 200.0),
+		Vector(200.0, 100.0, 200.0),
+		Vector(100.0, 200.0, 200.0));
+
 	Sphere* sp1 = new Sphere(Vector(0.5,0.5,0.5,0.0), 
 		Vector(0.4, 0.4, 0.4, 0.0),
 		70,
-		Vector(500.0, 300.0, 200.0), 70.0);
+		Vector(750.0, 500.0, 200.0), 70.0);
 	
+	scene->addChildren(tri1);
 	scene->addChildren(sp0);
-	scene->addChildren(sp1);
 	root=scene;
 
 	//Test source
@@ -45,7 +52,7 @@ Raytracer::Raytracer(double width, double height, double near,
 				Vector(0.1,0.5,0.1,0.0),
 				Vector(0.2,0.2,0.2,0.0));
 
-	Light* light1 = new Light(Vector(0.0, 0.0, 200.0),
+	Light* light1 = new Light(Vector(150.0, 150.0, 100.0),
 				Vector(1.0,1.0,0.0,0.0),
 				45.0,
 				Vector(0.3,0.0,0.0,0.0),
