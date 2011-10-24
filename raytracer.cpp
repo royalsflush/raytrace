@@ -23,6 +23,7 @@ Raytracer::Raytracer(double width, double height, double near,
 	eye.z = -znear;
 
 	currMode = ORTHO;		
+	raysPP=3;
 
 	OrOp* scene = new OrOp;
 	
@@ -40,10 +41,11 @@ Raytracer::Raytracer(double width, double height, double near,
 	Sphere* sp1 = new Sphere(Vector(0.5,0.5,0.5,0.0), 
 		Vector(0.4, 0.4, 0.4, 0.0),
 		70,
-		Vector(750.0, 500.0, 200.0), 70.0);
+		Vector(400.0, 400.0, 200.0), 70.0);
 	
 	scene->addChildren(tri1);
 	scene->addChildren(sp0);
+	scene->addChildren(sp1);
 	root=scene;
 
 	//Test source
@@ -93,6 +95,22 @@ Vector Raytracer::getColor(double px, double py) {
 	for (int i=0; i<lights.size(); i++) 
 		color+=lights[i]->calculateContrib(o,pt,*obj);
 	
+	return color;
+}
+
+Vector Raytracer::getPixelColor(int px, int py) {
+	srand(time(NULL));
+	Vector color(0.0,0.0,0.0,0.0);
+	
+	for (int i=0; i<this->raysPP; i++) {
+		double dx = (double)rand()/(double)RAND_MAX;
+		double dy = (double)rand()/(double)RAND_MAX;
+		
+		color+=getColor(px+dx,py+dy);
+	}
+
+	if (this->raysPP)
+		color/=(double)raysPP;
 	return color;
 }
 

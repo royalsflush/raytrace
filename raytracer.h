@@ -34,9 +34,13 @@ class Raytracer {
 	//Light vector
 	vector<Light*> lights;
 
+	//Rays per pixel
+	int raysPP; 
+
 	public:
 	Raytracer(double width, double height, double near,
 		double far);
+	Vector getPixelColor(int px, int py);
 	Vector getColor(double px, double py);		
 	void setBackground(float r, float g, float g, 
 		float a); 

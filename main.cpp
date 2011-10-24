@@ -84,7 +84,7 @@ void render() {
 
 	for (int x=0; x<WIN_W; x++) {
 		for (int y=0; y<WIN_H; y++) {
-			Vector col = r->getColor(x,y);
+			Vector col = r->getPixelColor(x,y);
 			glColor3f(col.x,col.y,col.z);
 			
 			glBegin(GL_POINTS);
