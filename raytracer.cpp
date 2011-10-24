@@ -36,12 +36,12 @@ Raytracer::Raytracer(double width, double height, double near,
 	Light* light1 = new Light(Vector(0.0, 0.0, 200.0),
 				Vector(1.0,1.0,0.0,0.0),
 				45.0,
-				Vector(0.5,0.5,0.5,0.0),
+				Vector(0.3,0.3,0.3,0.0),
 				Vector(0.2,0.2,0.2,0.0));
 
 
 	lights.push_back(light0);
-//	lights.push_back(light1);
+	lights.push_back(light1);
 }
 
 Vector Raytracer::getColor(double px, double py) {

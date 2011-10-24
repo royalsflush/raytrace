@@ -8,7 +8,7 @@ Light::Light(const Vector& ppos, const Vector& pdir, double pang,
 
 Vector Light::calculateContrib(Vector& pv, Vector& pt, Object& obj) {
 	Vector n = obj.getNormalAtPoint(pt);
-	
+	n.normalize();	
 	Vector l = this->pos-pt;
 	l.normalize();
 	Vector r = (n*(l*n))*2.0-l;
@@ -19,8 +19,10 @@ Vector Light::calculateContrib(Vector& pv, Vector& pt, Object& obj) {
 	Vector col(0.0,0.0,0.0,0.0);
 		
 	//Diffuse
-	col+=this->dif*(l*n)*obj.getDif();
-//	col+=this->spec*(r*v)*obj.getSpec();
+	if (l*n>0) {
+		col+=this->dif*(l*n)*obj.getDif();
+//		col+=this->spec*(r*v)*obj.getSpec();
+	}
 
 	return col;
 }
