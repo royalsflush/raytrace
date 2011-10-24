@@ -2,23 +2,24 @@
 
 #include "raytracer.h"
 #include "vector.h"
+#include "ray.h"
+#include "sphere.h"
 
 const int negInf = 0xc0c0c0c0;
 
 Raytracer::Raytracer(double width, double height, double near,
 		double far) : w(width), h(height), znear(near), zfar(far) {
 
-	pos.x=500.0;
-	pos.y=550.0;
-	pos.z=130.0;
-	sr = 200.0;
-
 	eye.x = width/2.0;
 	eye.y = height/2.0;
 	eye.z = -znear;
 
-	r=g=b=a=0.0;	
+	bgVec = Vector(0.0,0.0,0.0,0.0);	
 	currMode = ORTHO;		
+
+	Vector color(1.0,0.0,0.0,0.0);
+
+	root = new Sphere(Vector(1.0,0.0,0.0,0.0), Vector(200.0, 200.0, 200.0), 40.0);
 }
 
 Vector Raytracer::getColor(double px, double py) {
@@ -38,24 +39,10 @@ Vector Raytracer::getColor(double px, double py) {
 		}
 	}
 	
-	d.normalize();
+	Ray r(o,d);
 
-	double a = d*d;
-	double b = (d*2.0)*(o-pos);
-	double c = (o-pos)*(o-pos)-sr*sr;
-
-	double delta = b*b-4*a*c;
+	Sphere* s = root->checkIntersection(r);
 	
-	if (delta<0) //Hit the background
-		return Vector(this->r,this->b,
-			this->g, this->a);
-
-	double t1 = (-b-sqrt(delta))/2*a;
-	double t2 = (-b+sqrt(delta))/2*a;
-
-	double t = min(t1,t2);
-	if (t>0) return Vector(1.0,0.0,0.0,0.0);
-	
-	return Vector(this->r,this->b,
-		this->g, this->a);
+	if (!s) return bgVec;
+	return s->getColor();
 }

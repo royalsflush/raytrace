@@ -3,6 +3,7 @@
 using namespace std;
 
 #include "vector.h"
+#include "node.h" 
 
 enum tracerMode {
 	ORTHO, PERSPECTIVE 
@@ -18,14 +19,14 @@ class Raytracer {
 	//Window size
 	double w,h;
 
-	//Temporary sphere
-	double sr;
-	Vector pos;
-
 	//Background colour
-	double r,g,b,a;
+	Vector bgVec;
 
+	//Projection mode
 	tracerMode currMode;
+
+	//Scene tree
+	Node* root;
 
 	public:
 	Raytracer(double width, double height, double near,
