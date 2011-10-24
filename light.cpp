@@ -10,7 +10,7 @@ Light::Light(const Vector& ppos, const Vector& pdir, double pang,
 
 Vector Light::calculateContrib(Vector& pv, Vector& pt, Object& obj) {
 	Vector n = obj.getNormalAtPoint(pt);
-	n.normalize();	
+	
 	Vector l = this->pos-pt;
 	l.normalize();
 	Vector r = (n*(l*n))*2.0-l;
@@ -22,12 +22,16 @@ Vector Light::calculateContrib(Vector& pv, Vector& pt, Object& obj) {
 		
 	if (l*n>0) {
 		//Diffuse
-		col+=this->dif*(l*n)*obj.getDif();
+		col.x+=this->dif.x*(l*n)*obj.getDif().x;
+		col.y+=this->dif.y*(l*n)*obj.getDif().y;
+		col.z+=this->dif.z*(l*n)*obj.getDif().z;
 		
 		//Specular 
 		double rva = pow(r*v,obj.getShi());
-		col+=this->spec*rva*obj.getSpec();
+		col.x+=this->spec.x*rva*obj.getSpec().x;
+		col.y+=this->spec.y*rva*obj.getSpec().y;
+		col.z+=this->spec.z*rva*obj.getSpec().z;
 	}
-
+	
 	return col;
 }

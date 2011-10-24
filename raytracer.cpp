@@ -9,6 +9,7 @@ using namespace std;
 #include "object.h"
 #include "sphere.h"
 #include "light.h"
+#include "orOp.h"
 
 const int negInf = 0xc0c0c0c0;
 
@@ -21,22 +22,33 @@ Raytracer::Raytracer(double width, double height, double near,
 
 	currMode = ORTHO;		
 
-	root = new Sphere(Vector(1.0,0.0,0.0,0.0), 
+	OrOp* scene = new OrOp;
+	
+	Sphere* sp0 = new Sphere(Vector(0.5,0.5,0.5,0.0), 
+		Vector(0.4, 0.4, 0.4, 0.0),
+		70,
+		Vector(800.0, 500.0, 200.0), 70.0);
+
+	Sphere* sp1 = new Sphere(Vector(0.5,0.5,0.5,0.0), 
 		Vector(0.4, 0.4, 0.4, 0.0),
 		70,
 		Vector(500.0, 300.0, 200.0), 70.0);
+	
+	scene->addChildren(sp0);
+	scene->addChildren(sp1);
+	root=scene;
 
 	//Test source
 	Light* light0 = new Light(Vector(600.0, 400.0, 0.0),
 				Vector(-1.0,-1.0,0.0,0.0),
 				45.0,
-				Vector(0.5,0.5,0.5,0.0),
+				Vector(0.1,0.5,0.1,0.0),
 				Vector(0.2,0.2,0.2,0.0));
 
 	Light* light1 = new Light(Vector(0.0, 0.0, 200.0),
 				Vector(1.0,1.0,0.0,0.0),
 				45.0,
-				Vector(0.3,0.3,0.3,0.0),
+				Vector(0.3,0.0,0.0,0.0),
 				Vector(0.2,0.2,0.2,0.0));
 
 
